@@ -17,6 +17,24 @@ attr_accessor :wrong_guesses
     @guesses = ''
     @wrong_guesses = ''
   end
+  
+  def guess(letter)
+    not_guessed = !(@guesses.include? letter) && !(@wrong_guesses.include? letter)
+    alphabet = !!(letter =~ /[[:alpha:]]/)
+    valid = false
+    
+    if (alphabet == true) && (not_guessed == true)
+        valid = true
+    end
+    
+    if @word.include? letter
+        @guesses += letter
+    else
+        @wrong_guesses += letter
+    end
+    valid
+  end
+
 
   # You can test it by running $ bundle exec irb -I. -r app.rb
   # And then in the irb: irb(main):001:0> HangpersonGame.get_random_word
