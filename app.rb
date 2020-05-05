@@ -57,18 +57,29 @@ class HangpersonApp < Sinatra::Base
   # Notice that the show.erb template expects to use the instance variables
   # wrong_guesses and word_with_guesses from @game.
   get '/show' do
-    ### YOUR CODE HERE ###
-    erb :show # You may change/remove this line
+    if @game.check_win_or_lose == :win
+        redirect '/win'
+    elsif @game.check_win_or_lose == :lose
+        redirect '/lose'
+    else
+        erb :show
+    end
   end
   
   get '/win' do
-    ### YOUR CODE HERE ###
-    erb :win # You may change/remove this line
+    if (@game.check_win_or_lose) == :win
+        erb :win # You may change/remove this line
+    else
+        erb: show
+    end
   end
   
   get '/lose' do
-    ### YOUR CODE HERE ###
-    erb :lose # You may change/remove this line
+    if @game.check_win_or_lose == :win
+        erb :lose # You may change/remove this line
+    else
+        erb: show
+    end
   end
   
 end
