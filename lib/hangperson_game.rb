@@ -18,11 +18,12 @@ attr_accessor :wrong_guesses
     @wrong_guesses = ''
   end
   
-  def guess(letter)
+   def guess(letter)
+    raise ArgumentError if letter.nil?
     letter.downcase!
     not_guessed = !(@guesses.include?(letter)) && !(@wrong_guesses.include?(letter))
     alphabet = !!(letter =~ /[a-z]/)
-    raise ArgumentError if !alphabet 
+    raise ArgumentError if !alphabet || letter.empty?
     valid = false
     
     if (not_guessed == true)
