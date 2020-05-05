@@ -19,20 +19,26 @@ attr_accessor :wrong_guesses
   end
   
   def guess(letter)
-    not_guessed = !(@guesses.include? letter) && !(@wrong_guesses.include? letter)
-    alphabet = !!(letter =~ /[[:alpha:]]/)
+    letter.downcase!
+    not_guessed = !(@guesses.include?(letter)) && !(@wrong_guesses.include?(letter))
+    alphabet = !!(letter =~ /[a-z]/)
+    raise ArgumentError if !alphabet 
     valid = false
     
-    if (alphabet == true) && (not_guessed == true)
+    if (not_guessed == true)
         valid = true
+    else
+        return false
     end
+
     
-    if @word.include? letter
+    
+    if @word.include?(letter)
         @guesses += letter
     else
         @wrong_guesses += letter
     end
-    valid
+    return valid
   end
 
 
