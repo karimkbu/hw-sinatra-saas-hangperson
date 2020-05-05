@@ -42,6 +42,16 @@ attr_accessor :wrong_guesses
     return valid
   end
 
+  def word_with_guesses
+    temp = '-' * @word.length 
+    @word.each_char.with_index do |letter,ind|
+        if @guesses.include?(letter)
+            temp[ind] = letter
+        end
+    end
+    return temp
+  end 
+
 
   # You can test it by running $ bundle exec irb -I. -r app.rb
   # And then in the irb: irb(main):001:0> HangpersonGame.get_random_word
