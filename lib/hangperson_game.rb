@@ -44,13 +44,24 @@ attr_accessor :wrong_guesses
 
   def word_with_guesses
     temp = '-' * @word.length 
-    @word.each_char.with_index do |letter,ind|
+    @word.each_char.with_index do |letter,ind| 
         if @guesses.include?(letter)
             temp[ind] = letter
         end
     end
     return temp
   end 
+
+  def check_win_or_lose
+    if word_with_guesses == @word
+        return :win
+    elsif @wrong_guesses.length >= 7
+        return :lose
+    else
+        return :play 
+    end
+  end
+
 
 
   # You can test it by running $ bundle exec irb -I. -r app.rb
